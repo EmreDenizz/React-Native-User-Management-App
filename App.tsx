@@ -8,6 +8,9 @@ import UserListScreen from './screens/UserList';
 import UserDetailsScreen from './screens/UserDetails';
 import AddUserScreen from './screens/AddUser';
 
+import { Provider } from 'react-redux';
+import store from './store';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -30,27 +33,29 @@ function AddUserStackNavigator() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="User Management"
-          component={UsersListStackNavigator}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="people" size={size} color={color}/>
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Add User"
-          component={AddUserStackNavigator}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="person-add-outline" size={size} color={color}/>
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="User Management"
+            component={UsersListStackNavigator}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="people" size={size} color={color}/>
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Add User"
+            component={AddUserStackNavigator}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="person-add-outline" size={size} color={color}/>
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }

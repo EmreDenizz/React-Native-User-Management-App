@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Text, ScrollView, TextInput, TouchableOpacity, View } from 'react-native';
 import Dropdown from 'react-native-input-select';
+import { useDispatch } from 'react-redux';
 
 import styles from '../lib/Styles';
 import { ValidateForm } from '../lib/FormValidation';
 
 export default function AddUserScreen() {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [role, setRole] = useState('Viewer');
   const [email, setEmail] = useState('');
@@ -14,6 +16,13 @@ export default function AddUserScreen() {
 
   const handleSave = () => {
     if (ValidateForm(name, email, phone, age)) {
+      dispatch({
+        type: 'NEW_USER',
+        payload: {
+          id: 3
+        },
+      });
+
       console.log('Form submitted successfully');
     }
   };

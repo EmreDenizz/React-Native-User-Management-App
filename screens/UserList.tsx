@@ -3,12 +3,14 @@ import { TouchableOpacity, ScrollView, SafeAreaView, Text, Alert, View } from 'r
 import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 import styles from '../lib/Styles';
 import { User } from '../lib/Types';
 
 export default function UserListScreen() {
   const navigation = useNavigation();
+  const newUser = useSelector((state: any) => state.newUser);
 
   const userList: User[] = [
     { id: 1, name: 'Johndfsf Doedfgdfg', email: 'john@test.com', role: 'Admin', phone: '4376665544', age: 21  },
@@ -38,6 +40,9 @@ export default function UserListScreen() {
           // @ts-ignore
           <TouchableOpacity key={user.id} onPress={() => {navigation.navigate('Details', { user });}}>
             <Card style={styles.card}>
+              {newUser.id === user.id && (
+                <Text style={styles.statusTitle}>New</Text>
+              )}
               <Ionicons
                 name="trash-outline"
                 color="red"
