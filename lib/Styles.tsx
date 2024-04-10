@@ -22,17 +22,23 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
     marginTop: 10,
-    padding: 10,
+    padding: 5,
     borderColor: "black",
     borderRadius: 10,
     borderWidth: 1,
-    width: 60,
+    width: 50,
     backgroundColor: "#c7f0d0",
   },
   mainTitle: {
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 10
+  },
+  successMsg: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "green"
   },
   card: {
     marginBottom: 15
@@ -108,6 +114,6 @@ export default StyleSheet.create({
   },
   verticalSpace: {
     width: 50,
-    height: 100
+    height: 170
   }
 });
