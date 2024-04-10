@@ -38,7 +38,8 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
-    color: "green"
+    color: "green",
+    marginTop: 5
   },
   card: {
     marginBottom: 15

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, TouchableOpacity, Text, View, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Dropdown from 'react-native-input-select';
@@ -22,10 +22,34 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
   const [phone, setPhone] = useState(user?.phone);
   const [age, setAge] = useState<number | ''>(user?.age || '');
   const [isVisible, setIsVisible] = useState(false);
+  const [isMsgVisible, setIsMsgVisible] = useState(false)
 
-  const handleSave = () => {
+  // API URL
+  const apiUrl = "http://127.0.0.1:3000";
+
+  const handleSave = (id: number) => {
     if (ValidateForm(name || '', email || '', phone || '', age)) {
-      console.log('Form submitted successfully.');
+      // PUT request to API for updating patient
+      const options = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: id,
+          name: name,
+          email: email,
+          role: role,
+          phone: phone,
+          age: age
+        })
+      };
+      fetch(apiUrl+"/users/"+id, options)
+      .then(data => {
+        setIsMsgVisible(true);
+        setIsVisible(false);
+      })
+        .catch((error) => {
+          console.error(error);
+        })
     }
   };
 
@@ -34,30 +58,36 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
     setAge(isNaN(numericValue) ? '' : numericValue);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsMsgVisible(false);
+    }, 2000);
+  }, [isMsgVisible])
+
   return (
       <ScrollView contentContainerStyle={styles.container2}>
         <View style={styles.secWrapper}>
           <View style={{flex: 1, flexDirection: "row"}}>
             <Ionicons name="person" size={60} />
             <View>
-              <Text style={styles.userNameText}>{user?.name}</Text>
-              <Text style={styles.roleText}>{user?.role}</Text>
+              <Text style={styles.userNameText}>{name}</Text>
+              <Text style={styles.roleText}>{role}</Text>
             </View>
           </View>
 
           <View style={styles.secTextContanier}>
             <Ionicons name="mail-outline" size={30} />
-            <Text style={styles.secText}>{user?.email}</Text>
+            <Text style={styles.secText}>{email}</Text>
           </View>
 
           <View style={styles.secTextContanier}>
             <Ionicons name="call-outline" size={30} />
-            <Text style={styles.secText}>{user?.phone}</Text>
+            <Text style={styles.secText}>{phone}</Text>
           </View>
 
           <View style={styles.secTextContanier}>
             <Ionicons name="calendar-outline" size={30} />
-            <Text style={styles.secText}>{user?.age}</Text>
+            <Text style={styles.secText}>{age}</Text>
           </View>
 
           <Ionicons
@@ -68,6 +98,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               onPress={() => {setIsVisible(!isVisible)}}
             />
         </View>
+
+        { isMsgVisible && <Text style={styles.successMsg}>User updated succesfully.</Text> }
 
         { isVisible && 
         <View>
@@ -126,7 +158,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
             {/* Save button */}
             <TouchableOpacity
                 style={[styles.button, {backgroundColor: 'blue'}]}
-                onPress = {handleSave}>
+                onPress = { () => handleSave(user?.id || 0) }>
                 <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
 
