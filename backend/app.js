@@ -31,7 +31,10 @@ app.post('/users', function(req, res) {
 
   // Parse user json from the request and push to stored users
   var user = req.body;
-  let newUserId = users[users.length-1].id + 1;
+  let newUserId = 1;
+  if(users.length > 0){
+    newUserId = users[users.length-1].id + 1;
+  }
   user.id = newUserId;
   users.push(user);
 
@@ -48,7 +51,7 @@ app.put('/users/:id', function(req, res) {
   var id = req.params.id;
   var user = req.body;
   for(var i=0; i<users.length; i++){
-    if(users[i].userId == id){
+    if(users[i].id == id){
       users[i] = user;
     }
   }
