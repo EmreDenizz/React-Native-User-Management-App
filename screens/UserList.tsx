@@ -80,7 +80,7 @@ export default function UserListScreen() {
               <Ionicons
                 name="trash-outline"
                 color="red"
-                size={28}
+                size={35}
                 style={styles.deleteButton}
                 onPress={() => handleDelete(user.id, user.name)}
               />
