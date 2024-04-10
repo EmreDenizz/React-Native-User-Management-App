@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, ScrollView, TextInput, TouchableOpacity, View } from 'react-native';
 import Dropdown from 'react-native-input-select';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 
 import styles from '../lib/Styles';
@@ -13,15 +14,41 @@ export default function AddUserScreen() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [age, setAge] = useState<number | ''>('');
+  const [isMsgVisible, setIsMsgVisible] = useState(false)
+
+  // API URL
+  const apiUrl = "http://127.0.0.1:3000";
 
   const handleSave = () => {
     if (ValidateForm(name, email, phone, age)) {
-      dispatch({
-        type: 'NEW_USER',
-        payload: {
-          id: 3
-        },
-      });
+
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          role: role,
+          phone: phone,
+          age: age
+        })
+      };
+      fetch(apiUrl+'/users', options)
+        .then(res => res.json())
+        .then(data => {
+          // redux
+          dispatch({
+            type: 'NEW_USER',
+            payload: {
+              id: data.id
+            },
+          });
+
+          setIsMsgVisible(true);
+        })
+        .catch((error) => {
+          console.error(error);
+        })
 
       console.log('Form submitted successfully');
     }
@@ -41,8 +68,24 @@ export default function AddUserScreen() {
     setAge(isNaN(numericValue) ? '' : numericValue);
   };
 
+  // Clear input fields when focus
+  useFocusEffect(
+    React.useCallback(() => {
+      handleClear();
+    }, [])
+  );
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsMsgVisible(false);
+    }, 2000);
+  }, [isMsgVisible])
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
+
+      {isMsgVisible && <Text style={styles.successMsg}>User added succesfully.</Text>}
+
       <Text style={styles.mainTitle}>Add User Form </Text>
       <TextInput
         style={styles.input}
