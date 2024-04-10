@@ -17,6 +17,18 @@ export default StyleSheet.create({
     marginBottom: 10,
     marginTop: 10
   },
+  statusTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginTop: 10,
+    padding: 10,
+    borderColor: "black",
+    borderRadius: 10,
+    borderWidth: 1,
+    width: 60,
+    backgroundColor: "#c7f0d0",
+  },
   mainTitle: {
     fontSize: 22,
     fontWeight: "bold",
