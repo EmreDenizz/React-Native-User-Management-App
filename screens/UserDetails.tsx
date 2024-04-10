@@ -21,6 +21,11 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
   const [email, setEmail] = useState(user?.email);
   const [phone, setPhone] = useState(user?.phone);
   const [age, setAge] = useState<number | ''>(user?.age || '');
+  const [nameInput, setNameInput] = useState(user?.name);
+  const [roleInput, setRoleInput] = useState(user?.role);
+  const [emailInput, setEmailInput] = useState(user?.email);
+  const [phoneInput, setPhoneInput] = useState(user?.phone);
+  const [ageInput, setAgeInput] = useState<number | ''>(user?.age || '');
   const [isVisible, setIsVisible] = useState(false);
   const [isMsgVisible, setIsMsgVisible] = useState(false)
 
@@ -28,25 +33,31 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
   const apiUrl = "http://127.0.0.1:3000";
 
   const handleSave = (id: number) => {
-    if (ValidateForm(name || '', email || '', phone || '', age)) {
+    if (ValidateForm(nameInput || '', emailInput || '', phoneInput || '', ageInput)) {
       // PUT request to API for updating patient
       const options = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           id: id,
-          name: name,
-          email: email,
-          role: role,
-          phone: phone,
-          age: age
+          name: nameInput,
+          email: emailInput,
+          role: roleInput,
+          phone: phoneInput,
+          age: ageInput
         })
       };
       fetch(apiUrl+"/users/"+id, options)
-      .then(data => {
-        setIsMsgVisible(true);
-        setIsVisible(false);
-      })
+        .then(data => {
+          setIsMsgVisible(true);
+          setIsVisible(false);
+
+          setName(nameInput);
+          setEmail(emailInput);
+          setPhone(phoneInput);
+          setAge(ageInput);
+          setRole(roleInput);
+        })
         .catch((error) => {
           console.error(error);
         })
@@ -55,7 +66,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
 
   const handleAgeInputChange = (text: string) => {
     const numericValue = parseFloat(text);
-    setAge(isNaN(numericValue) ? '' : numericValue);
+    setAgeInput(isNaN(numericValue) ? '' : numericValue);
   };
 
   useEffect(() => {
@@ -93,7 +104,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
           <Ionicons
               name="create-outline"
               color="blue"
-              size={28}
+              size={35}
               style={styles.editButton}
               onPress={() => {setIsVisible(!isVisible)}}
             />
@@ -107,8 +118,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
             <TextInput
               style={styles.input}
               placeholder="Enter Name..."
-              value={name}
-              onChangeText={text => setName(text)}
+              value={nameInput}
+              onChangeText={text => setNameInput(text)}
               autoComplete="off"
               autoCapitalize="none"
               autoCorrect={false}
@@ -116,8 +127,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
             <TextInput
               style={styles.input}
               placeholder="Enter Email..."
-              value={email}
-              onChangeText={text => setEmail(text)}
+              value={emailInput}
+              onChangeText={text => setEmailInput(text)}
               keyboardType="email-address"
               autoComplete="off"
               autoCapitalize="none"
@@ -126,8 +137,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
             <TextInput
               style={styles.input}
               placeholder="Enter Phone (10 digits)..."
-              value={phone}
-              onChangeText={text => setPhone(text)}
+              value={phoneInput}
+              onChangeText={text => setPhoneInput(text)}
               autoComplete="off"
               autoCapitalize="none"
               autoCorrect={false}
@@ -135,7 +146,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
             <TextInput
               style={styles.input}
               placeholder="Enter Age..."
-              value={age === '' ? '' : age.toString()}
+              value={ageInput === '' ? '' : ageInput.toString()}
               onChangeText={handleAgeInputChange}
               keyboardType="number-pad"
               autoComplete="off"
@@ -149,8 +160,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
                   { label: 'User', value: 'User' },
                   { label: 'Admin', value: 'Admin' },
                 ]}
-                selectedValue={role}
-                onValueChange={(value: string) => setRole(value)}
+                selectedValue={roleInput}
+                onValueChange={(value: string) => setRoleInput(value)}
                 primaryColor={'blue'}
                 isMultiple={false}
             />
