@@ -56,8 +56,6 @@ export default function AddUserScreen() {
         .catch((error) => {
           console.error(error);
         })
-
-      console.log('Form submitted successfully');
     }
   };
 
