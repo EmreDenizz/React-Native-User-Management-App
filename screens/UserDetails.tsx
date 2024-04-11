@@ -225,7 +225,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
         >
           <View style={styles.modal}>
             <View style={styles.modalTextView}>
-              <Text style={styles.modalText}>User updated succesfully.</Text>
+              <Text style={styles.modalText}>User updated successfully.</Text>
             </View>
           </View>
         </Modal>

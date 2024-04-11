@@ -116,7 +116,7 @@ export default function UserListScreen() {
       >
         <View style={styles.modal}>
           <View style={styles.modalTextView}>
-            <Text style={styles.modalText}>User deleted succesfully.</Text>
+            <Text style={styles.modalText}>User deleted successfully.</Text>
           </View>
         </View>
       </Modal>

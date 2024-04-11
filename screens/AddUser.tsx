@@ -182,7 +182,7 @@ export default function AddUserScreen() {
       >
         <View style={styles.modal}>
           <View style={styles.modalTextView}>
-            <Text style={styles.modalText}>User added succesfully.</Text>
+            <Text style={styles.modalText}>User added successfully.</Text>
           </View>
         </View>
       </Modal>
