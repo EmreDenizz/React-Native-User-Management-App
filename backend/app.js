@@ -3,16 +3,17 @@
  * @date April, 2024
  */
 
-// HTTP Server definitions
+// HTTP API Server definitions
 const express = require('express');
 const app = express();
 const port = 3000;
 app.use(express.json());
 
-// Define initial users
+// define initial users
 var users = [
-  { id: 1, name: 'Peter John Doe', email: 'john@test.com', role: 'Admin', phone: '4376665544', age: 21 },
-  { id: 2, name: 'Jane Smith', email: 'jane@test.com', role: 'User', phone: '4378885545', age: 22 }
+  { id: 1, name: 'Peter John Doe', email: 'peter@test.com', role: 'Admin', phone: '4376665544', age: 21 },
+  { id: 2, name: 'Jane Smith', email: 'jane@test.com', role: 'User', phone: '4372223388', age: 22 },
+  { id: 3, name: 'Philip Sharp', email: 'philip@test.com', role: 'Viewer', phone: '4375552299', age: 25 }
 ];
 
 // GET

@@ -1,3 +1,8 @@
+/**
+ * @author Emre Deniz
+ * @date April, 2024
+ */
+
 import React, { useEffect, useState } from 'react';
 import { Text, ScrollView, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -20,6 +25,7 @@ export default function AddUserScreen() {
   // API URL
   const apiUrl = "http://127.0.0.1:3000";
 
+  // Handle save
   const handleSave = () => {
     if (ValidateForm(name, email, phone, age)) {
 
@@ -55,6 +61,7 @@ export default function AddUserScreen() {
     }
   };
 
+  // Handle clear
   const handleClear = () => {
     setName("");
     setEmail("");
@@ -64,6 +71,7 @@ export default function AddUserScreen() {
     setRole("User")
   };
 
+  // Handle age change
   const handleAgeInputChange = (text: string) => {
     const numericValue = parseFloat(text);
     setAge(isNaN(numericValue) ? '' : numericValue);
@@ -76,18 +84,23 @@ export default function AddUserScreen() {
     }, [])
   );
 
+  // Hide success message
   useEffect(() => {
     setTimeout(() => {
       setIsMsgVisible(false);
-    }, 2000);
+    }, 2500);
   }, [isMsgVisible])
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-
+      
+      {/* Success message */}
       {isMsgVisible && <Text style={styles.successMsg}>User added succesfully.</Text>}
 
+      {/* Form title */}
       <Text style={styles.mainTitle}>Add User Form </Text>
+
+      {/* User name input */}
       <TextInput
         style={styles.input}
         placeholder="Enter Name..."
@@ -98,6 +111,8 @@ export default function AddUserScreen() {
         autoCorrect={false}
         originalColor="#BCB7B7"
       />
+
+      {/* User email input */}
       <TextInput
         style={styles.input}
         placeholder="Enter Email..."
@@ -109,6 +124,8 @@ export default function AddUserScreen() {
         autoCorrect={false}
         originalColor="#BCB7B7"
       />
+
+      {/* User phone input */}
       <TextInput
         style={styles.input}
         placeholder="Enter Phone (10 digits)..."
@@ -119,6 +136,8 @@ export default function AddUserScreen() {
         autoCorrect={false}
         originalColor="#BCB7B7"
       />
+
+      {/* User age input */}
       <TextInput
         style={styles.input}
         placeholder="Enter Age..."
@@ -130,6 +149,8 @@ export default function AddUserScreen() {
         autoCorrect={false}
         originalColor="#BCB7B7"
       />
+
+      {/* User role dropdown */}
       <Dropdown
           placeholder="Select a role..."
           options={[

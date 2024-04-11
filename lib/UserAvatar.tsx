@@ -1,13 +1,19 @@
+/**
+ * @author Emre Deniz
+ * @date April, 2024
+ */
+
 import React from 'react';
 import { View, Text } from 'react-native';
 import styles from '../lib/Styles';
 
+// Props
 interface Props {
   name: string;
 }
 
 const UserAvatar: React.FC<Props> = ({ name }) => {
-  // generate a random color
+  // Generate a random backgorund color
   const getRandomColor = () => {
     let letters = '0123456789ABCDEF';
     let color = '';
@@ -17,7 +23,7 @@ const UserAvatar: React.FC<Props> = ({ name }) => {
     return '#'+color;
   };
 
-  // get initials from the name
+  // Get initials from the user name
   const initials = (name.split(' ')[0][0] + name.split(' ')[name.split(' ').length - 1][0]).toUpperCase();
 
   return (

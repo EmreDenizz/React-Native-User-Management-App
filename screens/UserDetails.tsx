@@ -1,3 +1,8 @@
+/**
+ * @author Emre Deniz
+ * @date April, 2024
+ */
+
 import React, { useState, useEffect } from 'react';
 import { ScrollView, TouchableOpacity, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,6 +14,7 @@ import { ValidateForm } from '../lib/FormValidation'
 import styles from '../lib/Styles';
 import UserAvatar  from '../lib/UserAvatar';
 
+// Props
 interface UserDetailsProps {
   route: {
     params?: { user?: User; };
@@ -23,17 +29,20 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
   const [email, setEmail] = useState(user?.email);
   const [phone, setPhone] = useState(user?.phone);
   const [age, setAge] = useState<number | ''>(user?.age || '');
+
   const [nameInput, setNameInput] = useState(user?.name);
   const [roleInput, setRoleInput] = useState(user?.role);
   const [emailInput, setEmailInput] = useState(user?.email);
   const [phoneInput, setPhoneInput] = useState(user?.phone);
   const [ageInput, setAgeInput] = useState<number | ''>(user?.age || '');
+
   const [isVisible, setIsVisible] = useState(false);
   const [isMsgVisible, setIsMsgVisible] = useState(false)
 
   // API URL
   const apiUrl = "http://127.0.0.1:3000";
 
+  // Handle save
   const handleSave = (id: number) => {
     if (ValidateForm(nameInput || '', emailInput || '', phoneInput || '', ageInput)) {
       // PUT request to API for updating user
@@ -66,20 +75,24 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
     }
   };
 
+  // Handle age change
   const handleAgeInputChange = (text: string) => {
     const numericValue = parseFloat(text);
     setAgeInput(isNaN(numericValue) ? '' : numericValue);
   };
 
+  // Hide success message
   useEffect(() => {
     setTimeout(() => {
       setIsMsgVisible(false);
-    }, 2000);
+    }, 2500);
   }, [isMsgVisible])
 
   return (
       <ScrollView contentContainerStyle={styles.container2}>
         <View style={styles.secWrapper}>
+
+          {/* User avatar, name and role */}
           <View style={{flex: 1, flexDirection: "row"}}>
             <UserAvatar name={name || ''} />
             <View>
@@ -88,21 +101,25 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
             </View>
           </View>
 
+          {/* User email */}
           <View style={styles.secTextContanier}>
             <Ionicons name="mail-outline" size={30} />
             <Text style={styles.secText}>{email}</Text>
           </View>
 
+          {/* User phone */}
           <View style={styles.secTextContanier}>
             <Ionicons name="call-outline" size={30} />
             <Text style={styles.secText}>{phone}</Text>
           </View>
 
+          {/* User age */}
           <View style={styles.secTextContanier}>
             <Ionicons name="calendar-outline" size={30} />
             <Text style={styles.secText}>{age}</Text>
           </View>
 
+          {/* Edit icon */}
           <Ionicons
               name="create-outline"
               color="blue"
@@ -112,11 +129,15 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
             />
         </View>
 
+        {/* Success message */}
         { isMsgVisible && <Text style={styles.successMsg}>User updated succesfully.</Text> }
 
+        {/* Edit form */}
         { isVisible && 
         <View>
           <Text style={styles.formTitle}>Update User</Text>
+
+            {/* User name input */}
             <TextInput
               style={styles.input}
               placeholder="Enter Name..."
@@ -127,6 +148,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               autoCorrect={false}
               originalColor="#BCB7B7"
             />
+
+            {/* User email input */}
             <TextInput
               style={styles.input}
               placeholder="Enter Email..."
@@ -138,6 +161,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               autoCorrect={false}
               originalColor="#BCB7B7"
             />
+
+            {/* User phone input */}
             <TextInput
               style={styles.input}
               placeholder="Enter Phone (10 digits)..."
@@ -148,6 +173,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               autoCorrect={false}
               originalColor="#BCB7B7"
             />
+
+            {/* User age input */}
             <TextInput
               style={styles.input}
               placeholder="Enter Age..."
@@ -159,6 +186,8 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               autoCorrect={false}
               originalColor="#BCB7B7"
             />
+
+            {/* User role dropdown */}
             <Dropdown
                 placeholder="Select a role..."
                 options={[

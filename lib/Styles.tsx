@@ -1,3 +1,8 @@
+/**
+ * @author Emre Deniz
+ * @date April, 2024
+ */
+
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
@@ -155,5 +160,5 @@ export default StyleSheet.create({
   avatarInitials: {
     fontSize: 24,
     color: '#fff'
-  },
+  }
 });

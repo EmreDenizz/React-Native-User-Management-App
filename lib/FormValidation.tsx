@@ -1,3 +1,8 @@
+/**
+ * @author Emre Deniz
+ * @date April, 2024
+ */
+
 import { Alert } from 'react-native';
 
 export const ValidateForm = (name: string, email: string, phone: string, age: number | '') => {
