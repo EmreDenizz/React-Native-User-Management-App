@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, ScrollView, Text, Alert, View } from 'react-native';
+import { TouchableOpacity, ScrollView, Text, Alert, View, Modal } from 'react-native';
 import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -73,13 +73,11 @@ export default function UserListScreen() {
   useEffect(() => {
     setTimeout(() => {
       setIsMsgVisible(false);
-    }, 2000);
+    }, 1500);
   }, [isMsgVisible])
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Success message */}
-      {isMsgVisible && <Text style={styles.successMsg}>User deleted succesfully.</Text>}
 
       {/* User list */}
       {userList.map((user) => (
@@ -109,6 +107,20 @@ export default function UserListScreen() {
           </Card>
         </TouchableOpacity>
       ))}
+
+      {/* Success message modal */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={isMsgVisible}
+      >
+        <View style={styles.modal}>
+          <View style={styles.modalTextView}>
+            <Text style={styles.modalText}>User deleted succesfully.</Text>
+          </View>
+        </View>
+      </Modal>
+
       <View style={styles.verticalSpace} />
     </ScrollView>
   );

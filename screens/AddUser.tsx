@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Text, ScrollView, TouchableOpacity, View } from 'react-native';
+import { Text, ScrollView, TouchableOpacity, View, Modal } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
 import TextInput from "react-native-text-input-interactive";
@@ -88,15 +88,12 @@ export default function AddUserScreen() {
   useEffect(() => {
     setTimeout(() => {
       setIsMsgVisible(false);
-    }, 2500);
+    }, 1500);
   }, [isMsgVisible])
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       
-      {/* Success message */}
-      {isMsgVisible && <Text style={styles.successMsg}>User added succesfully.</Text>}
-
       {/* Form title */}
       <Text style={styles.mainTitle}>Add User Form </Text>
 
@@ -178,6 +175,19 @@ export default function AddUserScreen() {
           onPress = {handleClear}>
           <Text style={styles.buttonText}>Clear</Text>
       </TouchableOpacity>
+
+      {/* Success message modal */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={isMsgVisible}
+      >
+        <View style={styles.modal}>
+          <View style={styles.modalTextView}>
+            <Text style={styles.modalText}>User added succesfully.</Text>
+          </View>
+        </View>
+      </Modal>
 
       <View style={styles.verticalSpace} />
     </ScrollView>

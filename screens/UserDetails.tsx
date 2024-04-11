@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { ScrollView, TouchableOpacity, Text, View } from 'react-native';
+import { ScrollView, TouchableOpacity, Text, View, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Dropdown from 'react-native-input-select';
 import TextInput from "react-native-text-input-interactive";
@@ -36,7 +36,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
   const [phoneInput, setPhoneInput] = useState(user?.phone);
   const [ageInput, setAgeInput] = useState<number | ''>(user?.age || '');
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const [isMsgVisible, setIsMsgVisible] = useState(false)
 
   // API URL
@@ -61,7 +61,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
       fetch(apiUrl+"/users/"+id, options)
         .then(data => {
           setIsMsgVisible(true);
-          setIsVisible(false);
+          setIsFormVisible(false);
 
           setName(nameInput);
           setEmail(emailInput);
@@ -85,7 +85,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
   useEffect(() => {
     setTimeout(() => {
       setIsMsgVisible(false);
-    }, 2500);
+    }, 1500);
   }, [isMsgVisible])
 
   return (
@@ -125,15 +125,12 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               color="blue"
               size={35}
               style={styles.editButton}
-              onPress={() => {setIsVisible(!isVisible)}}
+              onPress={() => {setIsFormVisible(!isFormVisible)}}
             />
         </View>
 
-        {/* Success message */}
-        { isMsgVisible && <Text style={styles.successMsg}>User updated succesfully.</Text> }
-
         {/* Edit form */}
-        { isVisible && 
+        { isFormVisible && 
         <View>
           <Text style={styles.formTitle}>Update User</Text>
 
@@ -212,13 +209,27 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
             {/* Cancel button */}
             <TouchableOpacity
                 style={styles.buttonClear}
-                onPress = {() => {setIsVisible(false)}}>
+                onPress = {() => {setIsFormVisible(false)}}>
                 <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
 
             <View style={styles.verticalSpace} />
           </View>
         }
+
+        {/* Success message modal */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={isMsgVisible}
+        >
+          <View style={styles.modal}>
+            <View style={styles.modalTextView}>
+              <Text style={styles.modalText}>User updated succesfully.</Text>
+            </View>
+          </View>
+        </Modal>
+
       </ScrollView>
   );
 };

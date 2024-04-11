@@ -160,5 +160,23 @@ export default StyleSheet.create({
   avatarInitials: {
     fontSize: 24,
     color: '#fff'
-  }
+  },
+  modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalText: {
+    fontSize: 20,
+    color: 'white',
+  },
+  modalTextView: {
+    fontSize: 20,
+    marginBottom: 15,
+    textAlign: 'center',
+    color: 'white',
+    backgroundColor: 'green',
+    padding: 40,
+    borderRadius: 30,
+  },
 });
