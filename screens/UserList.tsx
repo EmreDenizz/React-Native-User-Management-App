@@ -5,8 +5,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 
-import styles from '../lib/Styles';
 import { User } from '../lib/Types';
+import styles from '../lib/Styles';
+import UserAvatar  from '../lib/UserAvatar';
 
 export default function UserListScreen() {
   const [userList, setUserList] = useState<User[] | []>([]);
@@ -19,7 +20,7 @@ export default function UserListScreen() {
   // API URL
   const apiUrl = "http://127.0.0.1:3000";
 
-  // Get all patients from API
+  // Get all users from API
   const getUsersFromAPI = async() => {
     await fetch(apiUrl+"/users").
       then((response) => response.json()).
@@ -80,14 +81,19 @@ export default function UserListScreen() {
               <Ionicons
                 name="trash-outline"
                 color="red"
-                size={35}
+                size={28}
                 style={styles.deleteButton}
                 onPress={() => handleDelete(user.id, user.name)}
               />
               <Card.Content>
-                <Text style={styles.title}>{user.name}</Text>
-                <Text>{user.email}</Text>
-                <Text>{user.role}</Text>
+                <View style={{flex: 1, flexDirection: "row"}}>
+                  <UserAvatar name={user.name} />
+                  <View>
+                    <Text style={styles.title}>{user.name}</Text>
+                    <Text>{user.email}</Text>
+                    <Text>{user.role}</Text>
+                  </View>
+                </View>
               </Card.Content>
             </Card>
           </TouchableOpacity>

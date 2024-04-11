@@ -116,5 +116,23 @@ export default StyleSheet.create({
   verticalSpace: {
     width: 50,
     height: 170
-  }
+  },
+  avatarContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginLeft: -7,
+    marginRight: 5,
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  avatarInitials: {
+    fontSize: 24,
+    color: '#fff',
+  },
 });

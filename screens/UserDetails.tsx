@@ -3,9 +3,10 @@ import { ScrollView, TouchableOpacity, Text, View, TextInput } from 'react-nativ
 import { Ionicons } from '@expo/vector-icons';
 import Dropdown from 'react-native-input-select';
 
-import styles from '../lib/Styles';
 import { User } from '../lib/Types';
 import { ValidateForm } from '../lib/FormValidation'
+import styles from '../lib/Styles';
+import UserAvatar  from '../lib/UserAvatar';
 
 interface UserDetailsProps {
   route: {
@@ -34,7 +35,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
 
   const handleSave = (id: number) => {
     if (ValidateForm(nameInput || '', emailInput || '', phoneInput || '', ageInput)) {
-      // PUT request to API for updating patient
+      // PUT request to API for updating user
       const options = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -79,7 +80,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
       <ScrollView contentContainerStyle={styles.container2}>
         <View style={styles.secWrapper}>
           <View style={{flex: 1, flexDirection: "row"}}>
-            <Ionicons name="person" size={60} />
+            <UserAvatar name={name || ''} />
             <View>
               <Text style={styles.userNameText}>{name}</Text>
               <Text style={styles.roleText}>{role}</Text>
