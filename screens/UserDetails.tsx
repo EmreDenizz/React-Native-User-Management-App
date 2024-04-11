@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, TouchableOpacity, Text, View, TextInput } from 'react-native';
+import { ScrollView, TouchableOpacity, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Dropdown from 'react-native-input-select';
+import TextInput from "react-native-text-input-interactive";
 
 import { User } from '../lib/Types';
 import { ValidateForm } from '../lib/FormValidation'
@@ -124,6 +125,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               autoComplete="off"
               autoCapitalize="none"
               autoCorrect={false}
+              originalColor="#BCB7B7"
             />
             <TextInput
               style={styles.input}
@@ -134,6 +136,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               autoComplete="off"
               autoCapitalize="none"
               autoCorrect={false}
+              originalColor="#BCB7B7"
             />
             <TextInput
               style={styles.input}
@@ -143,6 +146,7 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               autoComplete="off"
               autoCapitalize="none"
               autoCorrect={false}
+              originalColor="#BCB7B7"
             />
             <TextInput
               style={styles.input}
@@ -153,30 +157,32 @@ export default function UserDetailsScreen({ route }: UserDetailsProps) {
               autoComplete="off"
               autoCapitalize="none"
               autoCorrect={false}
+              originalColor="#BCB7B7"
             />
             <Dropdown
                 placeholder="Select a role..."
                 options={[
-                  { label: 'Viewer', value: 'Viewer' },
                   { label: 'User', value: 'User' },
+                  { label: 'Viewer', value: 'Viewer' },
                   { label: 'Admin', value: 'Admin' },
                 ]}
                 selectedValue={roleInput}
                 onValueChange={(value: string) => setRoleInput(value)}
                 primaryColor={'blue'}
                 isMultiple={false}
+                dropdownStyle={{minHeight: 50}}
             />
 
             {/* Save button */}
             <TouchableOpacity
-                style={[styles.button, {backgroundColor: 'blue'}]}
+                style={styles.buttonSave}
                 onPress = { () => handleSave(user?.id || 0) }>
                 <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
 
             {/* Cancel button */}
             <TouchableOpacity
-                style={[styles.button, {backgroundColor: 'red'}]}
+                style={styles.buttonClear}
                 onPress = {() => {setIsVisible(false)}}>
                 <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>

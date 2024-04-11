@@ -18,11 +18,7 @@ const UserAvatar: React.FC<Props> = ({ name }) => {
   };
 
   // get initials from the name
-  const initials = name
-    .split(' ')
-    .map((p) => p[0])
-    .join('')
-    .toUpperCase();
+  const initials = (name.split(' ')[0][0] + name.split(' ')[name.split(' ').length - 1][0]).toUpperCase();
 
   return (
     <View style={styles.avatarContainer}>

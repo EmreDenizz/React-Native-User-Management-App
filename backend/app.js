@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Define initial users
 var users = [
-  { id: 1, name: 'John Doe', email: 'john@test.com', role: 'Admin', phone: '4376665544', age: 21 },
+  { id: 1, name: 'Peter John Doe', email: 'john@test.com', role: 'Admin', phone: '4376665544', age: 21 },
   { id: 2, name: 'Jane Smith', email: 'jane@test.com', role: 'User', phone: '4378885545', age: 22 }
 ];
 

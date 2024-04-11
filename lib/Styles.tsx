@@ -9,7 +9,7 @@ export default StyleSheet.create({
   container2: {
     flexGrow: 1,
     paddingVertical: 0,
-    paddingHorizontal: 20,
+    paddingHorizontal: 20
   },
   title: {
     fontSize: 20,
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     width: 50,
-    backgroundColor: "#c7f0d0",
+    backgroundColor: "#c7f0d0"
   },
   mainTitle: {
     fontSize: 22,
@@ -39,7 +39,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     color: "green",
-    marginTop: 5
+    marginTop: 10
   },
   card: {
     marginBottom: 15
@@ -64,7 +64,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 5,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   formTitle: {
     fontSize: 24,
@@ -74,29 +74,50 @@ export default StyleSheet.create({
   },
   input: {
     height: 60,
-    borderWidth: 1,
     marginBottom: 15,
-    paddingHorizontal: 10,
     fontSize: 18
   },
-  button: {
+  buttonSave: {
+    height: 50,
+    width: "100%",
+    backgroundColor: '#2a41cb',
+    marginTop: 20,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowRadius: 8,
+    shadowOpacity: 0.3,
+    shadowColor: '#2a41cb',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    }
+  },
+  buttonClear: {
+    height: 50,
+    width: "100%",
+    backgroundColor: 'red',
     marginTop: 10,
-    paddingTop: 17,
-    paddingBottom: 17,
-    textAlign: 'center',
-    borderRadius: 5
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowRadius: 8,
+    shadowOpacity: 0.3,
+    shadowColor: 'red',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    }
   },
   buttonText: {
-    color: 'white',
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center'
+    fontSize: 18,
+    color: '#fff'
   },
   userNameText: {
     marginLeft: 8,
     marginTop: 7,
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   roleText: {
     fontSize: 16,
@@ -122,17 +143,17 @@ export default StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
     marginLeft: -7,
-    marginRight: 5,
+    marginRight: 5
   },
   avatar: {
     width: 50,
     height: 50,
     borderRadius: 50,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   avatarInitials: {
     fontSize: 24,
-    color: '#fff',
+    color: '#fff'
   },
 });

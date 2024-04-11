@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Text, ScrollView, TextInput, TouchableOpacity, View } from 'react-native';
-import Dropdown from 'react-native-input-select';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { Text, ScrollView, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
+import TextInput from "react-native-text-input-interactive";
+import Dropdown from 'react-native-input-select';
 
 import styles from '../lib/Styles';
 import { ValidateForm } from '../lib/FormValidation';
@@ -10,7 +11,7 @@ import { ValidateForm } from '../lib/FormValidation';
 export default function AddUserScreen() {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const [role, setRole] = useState('Viewer');
+  const [role, setRole] = useState('User');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [age, setAge] = useState<number | ''>('');
@@ -60,7 +61,7 @@ export default function AddUserScreen() {
     setPhone("");
     setPhone("");
     setAge("");
-    setRole("Viewer")
+    setRole("User")
   };
 
   const handleAgeInputChange = (text: string) => {
@@ -95,6 +96,7 @@ export default function AddUserScreen() {
         autoComplete="off"
         autoCapitalize="none"
         autoCorrect={false}
+        originalColor="#BCB7B7"
       />
       <TextInput
         style={styles.input}
@@ -105,6 +107,7 @@ export default function AddUserScreen() {
         autoComplete="off"
         autoCapitalize="none"
         autoCorrect={false}
+        originalColor="#BCB7B7"
       />
       <TextInput
         style={styles.input}
@@ -114,6 +117,7 @@ export default function AddUserScreen() {
         autoComplete="off"
         autoCapitalize="none"
         autoCorrect={false}
+        originalColor="#BCB7B7"
       />
       <TextInput
         style={styles.input}
@@ -124,30 +128,32 @@ export default function AddUserScreen() {
         autoComplete="off"
         autoCapitalize="none"
         autoCorrect={false}
+        originalColor="#BCB7B7"
       />
       <Dropdown
           placeholder="Select a role..."
           options={[
-            { label: 'Viewer', value: 'Viewer' },
             { label: 'User', value: 'User' },
+            { label: 'Viewer', value: 'Viewer' },
             { label: 'Admin', value: 'Admin' },
           ]}
           selectedValue={role}
           onValueChange={(value: string) => setRole(value)}
           primaryColor={'blue'}
           isMultiple={false}
+          dropdownStyle={{minHeight: 50}}
       />
 
       {/* Add button */}
       <TouchableOpacity
-          style={[styles.button, {backgroundColor: 'blue'}]}
+          style={styles.buttonSave}
           onPress = {handleSave}>
           <Text style={styles.buttonText}>Add User</Text>
       </TouchableOpacity>
 
       {/* Clear button */}
       <TouchableOpacity
-          style={[styles.button, {backgroundColor: 'red'}]}
+          style={styles.buttonClear}
           onPress = {handleClear}>
           <Text style={styles.buttonText}>Clear</Text>
       </TouchableOpacity>

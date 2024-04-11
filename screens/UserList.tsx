@@ -68,7 +68,7 @@ export default function UserListScreen() {
   }, [isMsgVisible])
 
   return (
-    <SafeAreaView>
+    // <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
         {isMsgVisible && <Text style={styles.successMsg}>User deleted succesfully.</Text>}
         {userList.map((user) => (
@@ -100,6 +100,6 @@ export default function UserListScreen() {
         ))}
         <View style={styles.verticalSpace} />
       </ScrollView>
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 }
