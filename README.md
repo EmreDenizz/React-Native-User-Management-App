@@ -1,19 +1,20 @@
 # React-Native-User-Management-App
-React Native User Management App using TypeScript, Redux and REST API.
+React Native User Management App using TypeScript, Redux and REST API (Node.js and Express).
 
 ### HOW TO RUN:
 ```console
-// Run backend API using Node.js and Express.js
-> cd backend
-> npm install
-> node app.js // keep terminal open
+// Run backend API
+cd backend
+npm install
+node app.js // keep terminal open
 
 // Run app
-Run iOS or Android simulator
+Run an iOS or Android simulator
 Open new terminal
-> npm install
-> npx expo start
-     press i (for iOS)
+
+npm install
+npx expo start
+    press i
 
 // Note: Android simulator gives network error because Android prevents non-SSL API requests.
          In the future, deploying API to an SSL platform could be the solution.
