@@ -147,7 +147,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
-    marginLeft: -7,
+    marginLeft: -8,
     marginRight: 5
   },
   avatar: {
@@ -179,4 +179,8 @@ export default StyleSheet.create({
     padding: 40,
     borderRadius: 30,
   },
+  flexRow: {
+    flex: 1,
+    flexDirection: "row"
+  }
 });

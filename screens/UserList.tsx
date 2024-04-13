@@ -1,10 +1,7 @@
-/**
- * @author Emre Deniz
- * @date April, 2024
- */
-
+// Import the necessary components and hooks
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, ScrollView, Text, Alert, View, Modal } from 'react-native';
+import TextInput from "react-native-text-input-interactive";
 import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -16,7 +13,8 @@ import UserAvatar  from '../lib/UserAvatar';
 
 export default function UserListScreen() {
   const [userList, setUserList] = useState<User[] | []>([]);
-  const [isMsgVisible, setIsMsgVisible] = useState(false)
+  const [searchText, setSearchText] = useState<string>('');
+  const [isMsgVisible, setIsMsgVisible] = useState(false);
 
   const navigation = useNavigation();
 
@@ -62,10 +60,11 @@ export default function UserListScreen() {
     );
   };
 
-  // Fetch users from API when focus
+  // Fetch users from API and reset the search when focus
   useFocusEffect(
     React.useCallback(() => {
       getUsersFromAPI();
+      setSearchText('');
     }, [])
   );
 
@@ -76,11 +75,28 @@ export default function UserListScreen() {
     }, 1500);
   }, [isMsgVisible])
 
+  // Filter user list
+  const filteredUserList = userList.filter((user) =>
+    user.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
 
+      {/* Search input box */}
+      <TextInput
+        style={styles.input}
+        placeholder="Search users..."
+        value={searchText}
+        onChangeText={setSearchText}
+        autoComplete="off"
+        autoCapitalize="none"
+        autoCorrect={false}
+        originalColor="#BCB7B7"
+      />
+
       {/* User list */}
-      {userList.map((user) => (
+      {filteredUserList.map((user) => (
         // @ts-ignore
         <TouchableOpacity key={user.id} onPress={() => {navigation.navigate('Details', { user });}}>
           <Card style={styles.card}>
@@ -95,10 +111,10 @@ export default function UserListScreen() {
               onPress={() => handleDelete(user.id, user.name)}
             />
             <Card.Content>
-              <View style={{flex: 1, flexDirection: "row"}}>
+              <View style={styles.flexRow}>
                 <UserAvatar name={user.name} />
                 <View>
-                  <Text style={styles.title}>{user.name}</Text>
+                  <Text numberOfLines={2} style={styles.title}>{user.name}</Text>
                   <Text>{user.email}</Text>
                   <Text>{user.role}</Text>
                 </View>
@@ -107,6 +123,7 @@ export default function UserListScreen() {
           </Card>
         </TouchableOpacity>
       ))}
+      { filteredUserList.length == 0 && <Text>No users found.</Text> }
 
       {/* Success message modal */}
       <Modal

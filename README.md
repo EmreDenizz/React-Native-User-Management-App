@@ -22,11 +22,12 @@ Open new terminal
 ### FEATURES:
 1. The app uses REST API server
 2. List all users
-3. Add a new user
-4. View user details
-5. Update user information
-6. Delete a user
-7. Tag the most recent user (using Redux store)
+3. Search users
+4. Add a new user
+5. View user details
+6. Update user information
+7. Delete a user
+8. Tag the most recent user (using Redux store)
 
 ### SCREENSHOTS:
 <kbd><img src="screenshots/SS_1.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_6.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_7.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_8.png" height="400"/></kbd>
