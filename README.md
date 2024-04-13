@@ -14,10 +14,10 @@ Open new terminal
 
 npm install
 npx expo start
-    press i
+    press i (for iOS)
 
 // Note: Android simulator gives network error because Android prevents non-SSL API requests.
-         In the future, deploying API to an SSL platform could be the solution.
+         Deploying API to a platform with SSL could be the solution in the future.
 ```
 
 ### FEATURES:
