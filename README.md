@@ -34,7 +34,7 @@ npx expo start
 <kbd><img src="screenshots/SS_1.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_6.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_7.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_8.png" height="400"/></kbd>
 
 
-<kbd><img src="screenshots/SS_2.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_3.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_4.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_5.png" height="400"/></kbd>
+<kbd><img src="screenshots/SS_9.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_10.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_2.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_5.png" height="400"/></kbd>
 
 
-<kbd><img src="screenshots/SS_9.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_10.png" height="400"/></kbd>
+<kbd><img src="screenshots/SS_3.png" height="400"/></kbd>    <kbd><img src="screenshots/SS_4.png" height="400"/></kbd>
