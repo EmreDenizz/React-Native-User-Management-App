@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { PermissionsAndroid, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,6 +11,7 @@ import AddUserScreen from './screens/AddUser';
 
 import { Provider } from 'react-redux';
 import store from './store';
+import { firebase } from '@react-native-firebase/messaging';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,6 +34,37 @@ function AddUserStackNavigator() {
 }
 
 export default function App() {
+
+  // Permission for notifications
+  PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+
+  // Manage push notifications
+  useEffect(() => {
+    const getFcmToken = async () => {
+      const fcmToken = await firebase.messaging().getToken();
+      if (fcmToken) {
+        console.log(fcmToken)
+      } else {
+        console.log("FcmToken not found")
+      }
+    };
+    getFcmToken();
+
+    firebase.messaging().onNotificationOpenedApp(async (remoteMessage) => {
+      console.log("Notification cause app to open from background state:", remoteMessage.notification);
+    })
+  
+    firebase.messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log('Message handled in the background!', remoteMessage);
+    });
+  
+    const unsubscribe = firebase.messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+  
+    return unsubscribe;
+  }, [])
+
   return (
     <Provider store={store}>
       <NavigationContainer>
